@@ -7,7 +7,9 @@ df = sns.load_dataset('iris')
 print(df.head())
 
 dependent_column = 'sepal_length'
-features = ['sepal_width', 'petal_length', 'petal_width']
+features = ['intercept', 'sepal_width', 'petal_length', 'petal_width']
+df['intercept'] = 1
+
 
 coefficients = []
 
