@@ -1,26 +1,23 @@
 import seaborn as sns
-import numpy as np
-import pandas as pd
+from sklearn import model_selection
+from sklearn import linear_model
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.metrics import r2_score, mean_squared_error
 
 
-df = sns.load_dataset('iris')
-print(df.head())
+df = sns.load_dataset('mpg')
 
-dependent_column = 'sepal_length'
-features = ['intercept', 'sepal_width', 'petal_length', 'petal_width']
-df['intercept'] = 1
+X = df[['displacement', 'weight']]
+y = df['mpg']
 
-
-coefficients = []
+X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X, y, test_size = 0.2, random_state = 1)
 
 for order in range(1, 10):
-    modified_df = df
-    betas = []
-    for feature in features:
-        column = df[[feature]]**order
-        beta = np.linalg.inv(column.T.dot(column)).dot(column.T).dot(df[dependent_column].fillna(0))    
-        betas.append(beta[0])
-    coefficients.append(betas)
+    polinomial_features = PolynomialFeatures(degree = order)
+    X_poly_training_data = polinomial_features.fit_transform(X_training_data)
 
-for function in coefficients:
-    print(function)
+    model = linear_model.LinearRegression()
+    model.fit(X_poly_training_data, y_training_data)
+
+    y_hat = model.predict(X_poly_training_data)
+    print(f'Order = {order}, RMSE = {mean_squared_error(y_training_data, y_hat, squared = False)}, R^2 = {r2_score(y_training_data, y_hat)}')
