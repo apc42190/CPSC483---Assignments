@@ -15,7 +15,7 @@ y = df['Idx']
 
 X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X, y, test_size = 0.4)
 
-for order in range(1, 9):
+for order in range(1, 15):
     # polynomial_features = PolynomialFeatures(degree = order)
 
     # X_poly_training_data = polynomial_features.fit_transform(X_training_data)
@@ -26,8 +26,8 @@ for order in range(1, 9):
     
     for power in range(2, order + 1):
         for feature in features:
-            X_poly_training_data[f'{feature}^{power}'] = X_poly_training_data[feature]**order
-            X_poly_testing_data[f'{feature}^{power}'] = X_poly_testing_data[feature]**order
+            X_poly_training_data[f'{feature}^{power}'] = X_poly_training_data[feature]**power
+            X_poly_testing_data[f'{feature}^{power}'] = X_poly_testing_data[feature]**power
 
 
     current_time = time.time()
