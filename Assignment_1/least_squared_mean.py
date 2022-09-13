@@ -15,7 +15,7 @@ y = df['Idx']
 
 X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X, y, test_size = 0.4)
 
-for order in range(1, 13):
+for order in range(1, 9):
     # polynomial_features = PolynomialFeatures(degree = order)
 
     # X_poly_training_data = polynomial_features.fit_transform(X_training_data)
@@ -26,12 +26,11 @@ for order in range(1, 13):
     
     for power in range(2, order + 1):
         for feature in features:
-            X_poly_training_data[f'{feature}^{order}'] = X_poly_training_data[feature]**order
-            X_poly_testing_data[f'{feature}^{order}'] = X_poly_testing_data[feature]**order
+            X_poly_training_data[f'{feature}^{power}'] = X_poly_training_data[feature]**order
+            X_poly_testing_data[f'{feature}^{power}'] = X_poly_testing_data[feature]**order
+
 
     current_time = time.time()
-    
-    print(X_poly_training_data.head())
     
     model = linear_model.LinearRegression()
     model.fit(X_poly_training_data, y_training_data)
@@ -47,4 +46,5 @@ for order in range(1, 13):
     testing_RMSE = "{:.5f}".format(mean_squared_error(y_testing_data, y_hat, squared = False)) 
     testing_R_2 = "{:.5f}".format(r2_score(y_testing_data, y_hat))
 
-    #print(f'Order: {order}, Training Time: {training_time} secs, Training RMSE: {training_RMSE}, Testing RMSE: {testing_RMSE}, Training R^2: {training_R_2}, Testing R^2: {testing_R_2}, Intercept: {model.intercept_}, Weights: {model.coef_}')
+    print(f'Order: {order}, Training Time: {training_time} secs, Training RMSE: {training_RMSE}, Testing RMSE: {testing_RMSE}, Training R^2: {training_R_2}, Testing R^2: {testing_R_2}')
+    #print(f'Intercept: {model.intercept_}, Weights: {model.coef_}\n')
