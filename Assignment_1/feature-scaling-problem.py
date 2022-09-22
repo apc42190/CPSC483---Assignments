@@ -14,13 +14,11 @@ import time
 #dataSet = pd.read_csv('test-scaled-data.csv')
 dataSet = pd.read_csv('Data1.csv')
 
-X = dataSet.iloc[:, 0:4].values
-y = dataSet.iloc[:, 4:5].values
 
 #Divide dataframe into depenant and independent variables
 features = ['T', 'P', 'TC', 'SV']
-X_str = dataSet[features]
-y_str = dataSet['Idx']
+X = dataSet[features]
+y = dataSet['Idx']
 
 
 print("\nOriginal data values : \n", X)
@@ -28,20 +26,16 @@ print("\nOriginal Idx values : \n", y)
 
 # MIN MAX SCALER
 min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
-y_min_max_scaler = preprocessing.MinMaxScaler(feature_range=(5,5))
 
 # Scaled feature
-x_after_min_max_scaler = min_max_scaler.fit_transform(X)
-y_after_min_max_scaler = min_max_scaler.fit_transform(y)
+X[features] = min_max_scaler.fit_transform(X)
 
 #x_after_min_max_scaler = min_max_scaler
-#y_after_min_max_scaler = min_max_scaler
 
-print("\nAfter min max scaling : \n", x_after_min_max_scaler)
-print("\ny After min max scaling : \n", y_after_min_max_scaler)
+print("\nAfter min max scaling : \n", X)
 
 # Split data between training and testing
-X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X_str, y_str, test_size = 0.4)
+X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X, y, test_size = 0.5)
 
 for order in range(1, 11):
 
