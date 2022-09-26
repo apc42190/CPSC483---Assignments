@@ -21,12 +21,12 @@ for order in range(1, 11):
     
     current_time = time.time()
     
-    #Generate Higher Order Terms: Include Interations
+    #Generate Higher Order Terms: Include Interactions
     # polynomial_features = PolynomialFeatures(degree = order)
     # X_poly_training_data = polynomial_features.fit_transform(X_training_data)
     # X_poly_testing_data = polynomial_features.fit_transform(X_testing_data)
     
-    #Generate Higher Order Terms: No Interations
+    #Generate Higher Order Terms: No Interactions
     X_poly_training_data =  X_training_data.copy()
     X_poly_testing_data = X_testing_data.copy()
     for power in range(2, order + 1):
