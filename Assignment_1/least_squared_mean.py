@@ -36,7 +36,7 @@ for order in range(1, 11):
             X_poly_testing_data[f'{feature}^{power}'] = X_poly_testing_data[feature]**power
     
     #Train model
-    model = linear_model.LinearRegression()
+    model = linear_model.LinearRegression(copy_X=True)
     model.fit(X_poly_training_data, y_training_data)
     
 
@@ -53,5 +53,5 @@ for order in range(1, 11):
     testing_RMSE = "{:.5f}".format(mean_squared_error(y_testing_data, y_hat, squared = False)) 
     testing_R_2 = "{:.5f}".format(r2_score(y_testing_data, y_hat))
 
-    print(f'Order: {order}, Training Time: {training_time} secs, Testing RMSE: {testing_RMSE}, Training RMSE: {training_RMSE}, Testing R^2: {testing_R_2}, Training R^2: {training_R_2}, Terms: {len(X_poly_training_data.columns)}')
+    print(f'Order: {order}, Training Time: {training_time} secs, Testing RMSE: {testing_RMSE}, Training RMSE: {training_RMSE}, Testing R^2: {testing_R_2}, Training R^2: {training_R_2}')
     #print(f'Intercept: {model.intercept_}, Weights: {model.coef_}\n')
