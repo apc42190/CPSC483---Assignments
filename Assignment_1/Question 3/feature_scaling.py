@@ -36,7 +36,7 @@ X[features] = min_max_scaler.fit_transform(X)
 print(f'Row 10,000 after scaling:\n{X.loc[[10000]]}\n')
 
 # Split data between training and testing
-X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X, y, test_size = 0.2)
+X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X, y, test_size = 0.2, random_state = 100)
 
 
 order = 4
