@@ -9,7 +9,7 @@ import time
 
 #Data to be read
 #df = pd.read_csv('test-scaled-data.csv')
-df = pd.read_csv('Data1.csv')
+df = pd.read_csv('../Data1.csv')
 
 
 #Divide dataframe into depenant and independent variables
@@ -27,10 +27,11 @@ min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
 X[features] = min_max_scaler.fit_transform(X)
 
 # Split data between training and testing
-X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X, y, test_size = 0.5)
+X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X, y, test_size = 0.2)
 
 
 order = 4
+
 # Generate Higher Order Terms: No Interations
 for power in range(2, order + 1):
     for feature in features:
