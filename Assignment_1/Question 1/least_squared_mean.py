@@ -8,7 +8,7 @@ import time
 
 
 #Load data into Pandas dataframe
-df = pd.read_csv('Data1.csv')
+df = pd.read_csv('../Data1.csv')
 
 #Divide dataframe into depenant and independent variables
 features = ['T', 'P', 'TC', 'SV']
@@ -16,7 +16,7 @@ X = df[features]
 y = df['Idx']
 
 #Split data between training and testing
-X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X, y, test_size = 0.5)
+X_training_data, X_testing_data, y_training_data, y_testing_data = model_selection.train_test_split(X, y, test_size = 0.2, random_state = 100)
 
 for order in range(1, 11):
     
